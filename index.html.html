@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monsters & Memories Early Access Countdown</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Trebuchet MS', sans-serif;
+        background: url("https://github.com/KrazanLoosh/MNM-countdown/blob/main/MNM.jpg") no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.65);
+        padding: 40px 60px;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        backdrop-filter: blur(6px);
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+
+    .countdown {
+        display: flex;
+        gap: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .time-box {
+        background: rgba(255, 140, 0, 0.9);
+        padding: 20px 25px;
+        border-radius: 12px;
+        min-width: 90px;
+    }
+
+    .time-box span {
+        display: block;
+    }
+
+    .number {
+        font-size: 2.4rem;
+        font-weight: bold;
+    }
+
+    .label {
+        font-size: 0.9rem;
+        margin-top: 5px;
+        letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+        .overlay {
+            padding: 25px;
+        }
+        .number {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="overlay">
+    <h1>Early Access Launch Countdown</h1>
+    <div class="countdown">
+        <div class="time-box">
+            <span class="number" id="days">0</span>
+            <span class="label">DAYS</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="hours">0</span>
+            <span class="label">HOURS</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="minutes">0</span>
+            <span class="label">MINUTES</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="seconds">0</span>
+            <span class="label">SECONDS</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const targetDate = new Date("June 1, 2026 00:00:00").getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            document.querySelector(".overlay").innerHTML =
+                "<h1>Early Access Is Live!</h1>";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
